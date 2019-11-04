@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "362993288768",
+    "firebase_url": "https://agaflix-58cfd.firebaseio.com",
+    "project_id": "agaflix-58cfd",
+    "storage_bucket": "agaflix-58cfd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362993288768:android:24fc528747b1537b09c1a5",
+        "android_client_info": {
+          "package_name": "com.example.agalix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362993288768-9rt787cakehto9d2ust4ngljpf2fg481.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.agalix",
+            "certificate_hash": "f0341320a2b5f0bb19ee84f010f5d98b44c1d9c2"
+          }
+        },
+        {
+          "client_id": "362993288768-rjndioll23d9a4llmqjrga84o6thkf0r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSk5VcJCN1_NfbBi3oZ402rmyNiPqcWoA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362993288768-rjndioll23d9a4llmqjrga84o6thkf0r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
