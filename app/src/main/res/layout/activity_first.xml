@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FirstActivity">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/aga10"/>
+
+    <TextView
+        android:id="@+id/txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+
+        android:text="agaFlix"
+        android:fontFamily="@font/ewert"
+        android:textSize="50sp"
+        android:layout_marginTop="80dp"
+        android:textAlignment="center"
+        android:textColor="#000000"/>
+
+
+<!--    <com.tomer.fadingtextview.FadingTextView-->
+<!--        android:id="@+id/fadingTxt"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:texts="@array/text_one"-->
+<!--        app:timeout="1000"-->
+<!--        android:textSize="40sp"-->
+<!--        android:textColor="@color/agaFlixTxtColor"-->
+<!--        android:background="@color/backgroundColor"-->
+<!--        android:layout_centerInParent="true"/>-->
+
+</RelativeLayout>
