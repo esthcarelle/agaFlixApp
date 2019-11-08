@@ -7,13 +7,19 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -35,7 +41,7 @@ public class DisplayActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display);
+        setContentView(R.layout.activity_admin);
 
         editPDFName=(EditText)findViewById(R.id.txt_pdfName);
         btn_upload=(Button)findViewById(R.id.btn_upload);
@@ -45,7 +51,10 @@ public class DisplayActivity extends AppCompatActivity {
 
 
         storageReference= FirebaseStorage.getInstance().getReference("uploads");
-        databaseReference= FirebaseDatabase.getInstance().getReference("");
+        databaseReference= FirebaseDatabase.getInstance().getReference("uploads");
+
+
+
         btn_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,12 +71,7 @@ public class DisplayActivity extends AppCompatActivity {
 //
 //            }
 //        });
-        mShowUploads.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
     }
 //    public void openFileChooser(){
 //        Intent intent=new Intent();
@@ -137,5 +141,31 @@ public class DisplayActivity extends AppCompatActivity {
 
     public void btn_action(View view){
         startActivity(new Intent(getApplicationContext(), View_PDF_Files.class));
+    }
+    public void btn_action2(View view){
+        startActivity(new Intent(getApplicationContext(), View_Video.class));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(DisplayActivity.this, UserLoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_logout) {
+            logout();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

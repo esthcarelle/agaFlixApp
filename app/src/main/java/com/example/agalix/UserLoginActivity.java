@@ -58,7 +58,7 @@ public class UserLoginActivity extends AppCompatActivity {
                 String pass = password.getText().toString();
 
                 if(mail.equals("kts@gmail.com") && pass.equals("123456")){
-                    startActivity(new Intent(UserLoginActivity.this, AdminActivity.class));
+                    startActivity(new Intent(UserLoginActivity.this, DisplayActivity.class));
                     finish();
                 }
 
@@ -79,10 +79,11 @@ public class UserLoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             Toast.makeText(UserLoginActivity.this, "You are logged in", Toast.LENGTH_SHORT).show();
+
                             if (!task.isSuccessful()) {
                                 Toast.makeText(UserLoginActivity.this, "Authentication failed! Please try again!", Toast.LENGTH_SHORT).show();
                             } else {
-                                startActivity(new Intent(UserLoginActivity.this, UserMainActivity.class));
+                                startActivity(new Intent(UserLoginActivity.this, UserActivity.class));
                                 finish();
                             }
                         }

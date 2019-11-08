@@ -6,12 +6,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +37,9 @@ public class View_PDF_Files extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view__pdf__files);
+
+
+
         myPDFListView=(ListView)findViewById(R.id.myListView);
         uploadPDFS=new ArrayList<>();
 
@@ -59,6 +67,30 @@ public class View_PDF_Files extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(View_PDF_Files.this, UserLoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_logout) {
+            logout();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void viewAllFiles(){
         databaseReference= FirebaseDatabase.getInstance().getReference("uploads");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -76,32 +108,19 @@ public class View_PDF_Files extends AppCompatActivity {
                     uploads[i]=uploadPDFS.get(i).getName();
 
                 }
-//
-//                ArrayAdapter<String> adapter=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,
-//                        android.R.id.text1,uploads){
-//                        @Override
-//                        public View getView(int position, View convertView, ViewGroup parent){
-//
-//                            View view=super.getView(position,convertView,parent);
-//                            TextView myText=(TextView) view.findViewById(android.R.id.text1);
-////                            TextView myText2=(TextView) view.findViewById(android.R.id.text2);
-////
-////                            myText2.setTextColor(Color.BLACK);
-//                            myText.setTextColor(Color.BLACK);
-//                                    return view;
-//                }
-                MyAdapter adapter=new MyAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,uploads,"gg"){
-                    @Override
-                    public View getView(int position, View convertView, ViewGroup parent){
+                System.out.println("ffff");
 
-                        View view=super.getView(position,convertView,parent);
-                        TextView myText=(TextView) view.findViewById(android.R.id.text1);
-//                            TextView myText2=(TextView) view.findViewById(android.R.id.text2);
-//
-//                            myText2.setTextColor(Color.BLACK);
-                        myText.setTextColor(Color.BLACK);
-                        return view;
-                    }
+                ArrayAdapter<String> adapter=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,
+                        uploads){
+                        @Override
+                        public View getView(int position, View convertView, ViewGroup parent){
+
+                            View view=super.getView(position,convertView,parent);
+                            TextView myText=(TextView) view.findViewById(android.R.id.text1);
+
+                            myText.setTextColor(Color.BLACK);
+                                    return view;
+                }
 
 
 
