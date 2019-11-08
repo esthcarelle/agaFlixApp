@@ -1,18 +1,27 @@
 package com.example.agalix;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-public class StreamActivity extends AppCompatActivity {
+public class StreamActivity extends AppCompatActivity{
+
 
     private VideoView video;
     private ImageView play;
@@ -31,6 +40,8 @@ public class StreamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stream);
 
+
+
         isPlaying = false;
         video = (VideoView) findViewById(R.id.video);
         play = (ImageView) findViewById(R.id.play);
@@ -40,7 +51,7 @@ public class StreamActivity extends AppCompatActivity {
         progress.setMax(100);
         bufferProgress = (ProgressBar) findViewById(R.id.buffer_progress);
 
-        videoUri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/streaming-85ff4.appspot.com/o/joeboy_beginning_visualizer_h264_49436.mp4?alt=media&token=16ac66fa-1656-4b49-9e21-acbdb27e9b34");
+        videoUri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/agaflix-af5b0.appspot.com/o/Ace%20Of%20Heart%20Bwana%20y'Umutima%20Official%20Trailer%20%231%202017-USHWMXXF-Ss.webm?alt=media&token=186eba73-97d9-4d08-89a1-e02fb5a10b80");
 
         video.setVideoURI(videoUri);
         video.requestFocus();
@@ -100,21 +111,47 @@ public class StreamActivity extends AppCompatActivity {
         });
     }
 
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_main, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+////        private void logout() {
+////            FirebaseAuth.getInstance().signOut();
+////            Intent intent = new Intent(MainActivity.this, LogInActivity.class);
+////            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+////            startActivity(intent);
+////            finish();
+////        }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.admin) {
+//                logout();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        isPlaying = false;
+    }
+
     public class VideoProgress extends AsyncTask<Void, Integer, Void>{
 
         @Override
         protected Void doInBackground(Void... voids){
 
             do{
-                current = video.getCurrentPosition()/1000;
-                try {
 
-                    int currentPercent = current * 100/duration;
-
-                    publishProgress(currentPercent);
-
-
-                }catch (Exception e){
+                if(isPlaying) {
+                    current = video.getCurrentPosition() / 1000;
+                    publishProgress(current);
 
                 }
 
@@ -128,7 +165,18 @@ public class StreamActivity extends AppCompatActivity {
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
 
-            progress.setProgress(values[0]);
+            try{
+
+                int currentPercent = values[0] * 100/duration;
+                progress.setProgress(currentPercent);
+
+                String currentString = String.format("%2d:%2d", values[0] / 60, values[0] % 60);
+
+                currentTimer.setText(currentString);
+
+            }catch (Exception e){
+
+            }
         }
     }
 }

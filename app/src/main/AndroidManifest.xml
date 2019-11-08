@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.agalix">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,13 +11,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StreamActivity">
+        <activity android:name=".View_PDF_Files"></activity>
+        <activity android:name=".DisplayActivity" />
+        <activity
+            android:name=".UserMainActivity"
+            android:label="@string/title_activity_user_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UserLoginActivity"
+            android:label="@string/title_activity_user_login" />
+        <activity android:name=".AdminActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/FirstTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".StreamActivity" />
+        <activity android:name=".UserSignupActivity" /> <!-- <activity android:name=".AdminActivity" /> -->
+        <activity android:name=".DownloadActivity" />
+        <activity android:name=".VideoActivity" />
     </application>
 
 </manifest>
