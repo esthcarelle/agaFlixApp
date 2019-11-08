@@ -36,7 +36,7 @@ public class StreamActivity extends AppCompatActivity{
     private boolean isPlaying;
     private int current = 0;
     private int duration = 0;
-
+    private String myUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,9 @@ public class StreamActivity extends AppCompatActivity{
         progress.setMax(100);
         bufferProgress = (ProgressBar) findViewById(R.id.buffer_progress);
 
-        videoUri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/agaflix-af5b0.appspot.com/o/Ace%20Of%20Heart%20Bwana%20y'Umutima%20Official%20Trailer%20%231%202017-USHWMXXF-Ss.webm?alt=media&token=186eba73-97d9-4d08-89a1-e02fb5a10b80");
+        myUrl = getIntent().getStringExtra("url");
+
+        videoUri = Uri.parse(myUrl);
 
         video.setVideoURI(videoUri);
         video.requestFocus();
